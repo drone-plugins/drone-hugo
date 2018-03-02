@@ -7,7 +7,7 @@
 cbrgm/drone-hugo is:
 
 - **Easy** to implement in your existing pipeline using `.drone.yml`
-- **Small** 22mb image size
+- **Small** 21mb image size
 - **Highly configurable**
 
 ## Basic Usage with Drone CI
@@ -89,13 +89,13 @@ Here is a short example of how to define a pipeline that automatically generates
 pipeline:
   build:
     image: cbrgm/drone-hugo:latest
-    # secrets: [ SCP_USER, SCP_PASS, SCP_URL, SCP_PATH ]
     output: public/drone-generated # Output path
     validate: true
     when:
       branch: [ master ]
   publish:
     image: appleboy/drone-scp
+    # secrets: [ Use secrets to hide credentials! ]
     host: cbrgm.de
     username: webuser
     password: xxxxxxx
