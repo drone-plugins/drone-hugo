@@ -1,6 +1,6 @@
 # cbrgm/drone-hugo
 
-[![GitHub release](https://img.shields.io/github/release/cbrgm/drone-hugo.svg)](https://github.com/cbrgm/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-3.7-ff69b4.svg) ![MicroBadger Size (tag)](https://img.shields.io/microbadger/image-size/cbrgm/drone-hugo/3.7.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/cbrgm/drone-hugo.svg)](https://hub.docker.com/r/cbrgm/drone-hugo/tags/)
+[![GitHub release](https://img.shields.io/github/release/cbrgm/drone-hugo.svg)](https://github.com/cbrgm/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.37-ff69b4.svg) ![MicroBadger Size (tag)](https://img.shields.io/microbadger/image-size/cbrgm/drone-hugo/3.7.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/cbrgm/drone-hugo.svg)](https://hub.docker.com/r/cbrgm/drone-hugo/tags/)
 
 **Automatically create static web page files using Hugo within your drone pipeline!**
 
@@ -70,7 +70,7 @@ pipeline:
   hugo:
     image: cbrgm/drone-hugo:latest
 +   buildDrafts: true
-+   buildExpired: tru
++   buildExpired: true
 +   buildFuture: true
     config: path/to/config
     content: path/to/content/

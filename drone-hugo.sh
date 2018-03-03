@@ -3,10 +3,10 @@
 set -e
 
 # Assign default variables if not set
-PLUGIN_BUILDDRAFTS=${PLUGIN_BUILDDRAFTS:-"false"}    # -D, --buildDrafts
-PLUGIN_BUILDEXPIRED=${PLUGIN_BUILDEXPIRED:-"false"}  # -E, --buildExpired
-PLUGIN_BUILDFUTURE=${PLUGIN_BUILDFUTURE:-"false"}    # -F, --buildFuture
-PLUGIN_CONFIG=${PLUGIN_CONFIG:-"false"}              # --config string    config file (default is path/config.yaml|json|toml)
+PLUGIN_BUILDDRAFTS=${PLUGIN_BUILDDRAFTS:-"false"}
+PLUGIN_BUILDEXPIRED=${PLUGIN_BUILDEXPIRED:-"false"}
+PLUGIN_BUILDFUTURE=${PLUGIN_BUILDFUTURE:-"false"}
+PLUGIN_CONFIG=${PLUGIN_CONFIG:-"false"}
 PLUGIN_CONTENT=${PLUGIN_CONTENT:-"false"}
 PLUGIN_LAYOUT=${PLUGIN_LAYOUT:-"false"}
 PLUGIN_OUTPUT=${PLUGIN_OUTPUT:-"false"}
