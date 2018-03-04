@@ -89,20 +89,40 @@ Here is a short example of how to define a pipeline that automatically generates
 pipeline:
   build:
     image: cbrgm/drone-hugo:latest
-    output: public/drone-generated # Output path
+    output: site # Output path
     validate: true
     when:
       branch: [ master ]
   publish:
     image: appleboy/drone-scp
-    # secrets: [ Use secrets to hide credentials! ]
     host: cbrgm.de
     username: webuser
     password: xxxxxxx
     port: 54321
-    rm: true
-    target: /var/www/blog
-    source: public/drone-generated/* # All files from output path
+    target: /var/www/ # Path to your web directory
+    source: site/* # Copy all files from output path
+
+```
+
+You can also use secrets to hide credentials:
+
+```yml
+pipeline:
+  build:
+    image: cbrgm/drone-hugo:latest
+    output: site # Output path
+    validate: true
+    when:
+      branch: [ master ]
+  publish:
+    image: appleboy/drone-scp
++   secrets: [ ssh_username, ssh_password ]
+    host: cbrgm.de
+-   username: webuser
+-   password: xxxxxxx
+    port: 54321
+    target: /var/www/ # Path to your web directory
+    source: site/* # Copy all files from output path
 
 ```
 
