@@ -1,6 +1,6 @@
 # cbrgm/drone-hugo
 
-[![GitHub release](https://img.shields.io/github/release/cbrgm/drone-hugo.svg)](https://github.com/cbrgm/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.37-ff69b4.svg) ![MicroBadger Size (tag)](https://img.shields.io/microbadger/image-size/cbrgm/drone-hugo/3.7.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/cbrgm/drone-hugo.svg)](https://hub.docker.com/r/cbrgm/drone-hugo/tags/)
+[![GitHub release](https://img.shields.io/github/release/cbrgm/drone-hugo.svg)](https://github.com/cbrgm/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.37-ff69b4.svg) ![MicroBadger Size (tag)](https://img.shields.io/microbadger/image-size/cbrgm/drone-hugo/0.37.svg) [![Docker Pulls](https://img.shields.io/docker/pulls/cbrgm/drone-hugo.svg)](https://hub.docker.com/r/cbrgm/drone-hugo/tags/)
 
 **Automatically create static web page files using Hugo within your drone pipeline!**
 
@@ -148,17 +148,17 @@ docker run --rm \
 
 ## Parameter Reference
 
-buildDrafts - include content marked as draft  
-buildExpired - include expired content  
-buildFuture - include content with publishdate in the future  
-config - config file (default is path/config.yaml|json|toml)  
-content - filesystem path to content directory  
-layout - filesystem path to layout directory
-output - filesystem path to write files to    
-source - filesystem path to read files relative from  
-theme - theme to use (located in /themes/THEMENAME/)
-url - hostname (and path) to the root  
-validate - validate config file before generation
+`buildDrafts` - include content marked as draft  
+`buildExpired` - include expired content  
+`buildFuture` - include content with publishdate in the future  
+`config` - config file (default is path/config.yaml|json|toml)  
+`content` - filesystem path to content directory  
+`layout` - filesystem path to layout directory  
+`output` - filesystem path to write files to  
+`source` - filesystem path to read files relative from  
+`theme` - theme to use (located in /themes/THEMENAME/)  
+`url` - hostname (and path) to the root  
+`validate` - validate config file before generation
 
 ## Contributing
 
