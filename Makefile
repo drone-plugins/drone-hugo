@@ -15,7 +15,7 @@ push: build
 	docker push "cbrgm/drone-hugo:$(hugo)"
 	docker push "cbrgm/drone-hugo:latest"
 
-release: test build push clean
+release: $(README_TEMPLATE) test build push clean
 	sed 's/<HUGO_VERSION>/$(hugo)/g' $(README_TEMPLATE) > README.md
 	git add .
 	git commit -m "Updated to the latest Hugo version v.$(hugo), see https://github.com/gohugoio/hugo/releases"
