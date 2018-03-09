@@ -2,7 +2,7 @@ FROM alpine:latest
 LABEL maintainer="chris@cbrgm.de"
 LABEL version="latest"
 
-ENV HUGO_VERSION="0.37"
+ARG HUGO_VERSION
 
 COPY ./drone-hugo.sh /bin/
 RUN chmod +x /bin/drone-hugo.sh
