@@ -1,6 +1,6 @@
 # cbrgm/drone-hugo
 
-[![GitHub release](https://img.shields.io/github/release/cbrgm/drone-hugo.svg)](https://github.com/cbrgm/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.38-ff69b4.svg)
+[![GitHub release](https://img.shields.io/github/release/cbrgm/drone-hugo.svg)](https://github.com/cbrgm/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.38.1-ff69b4.svg)
 [![Docker Pulls](https://img.shields.io/docker/pulls/cbrgm/drone-hugo.svg)](https://hub.docker.com/r/cbrgm/drone-hugo/tags/)
 
 **Automatically create static web page files using Hugo within your drone pipeline!**
@@ -18,7 +18,7 @@ The example below demonstrates how you can use the plugin to automatically creat
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:0.38
+    image: cbrgm/drone-hugo:0.38.1
     validate: true
 ```
 
@@ -31,7 +31,7 @@ You can customize the paths for e. g. the theme, layout, content directory and o
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:0.38
+    image: cbrgm/drone-hugo:0.38.1
 +   config: path/to/config
 +   content: path/to/content/
 +   layout: path/to/layout
@@ -48,7 +48,7 @@ You can also define a base URL directly in the pipeline, which is used when gene
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:0.38
+    image: cbrgm/drone-hugo:0.38.1
     config: path/to/config
     content: path/to/content/
     output: path/to/public
@@ -69,7 +69,7 @@ You can set the `buildDrafts`, `buildExpired`, `buildFuture` settings to configu
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:0.38
+    image: cbrgm/drone-hugo:0.38.1
 +   buildDrafts: true
 +   buildExpired: true
 +   buildFuture: true
@@ -89,7 +89,7 @@ Here is a short example of how to define a pipeline that automatically generates
 ```yml
 pipeline:
   build:
-    image: cbrgm/drone-hugo:0.38
+    image: cbrgm/drone-hugo:0.38.1
     output: site # Output path
     validate: true
     when:
@@ -109,7 +109,7 @@ You can also use secrets to hide credentials:
 ```yml
 pipeline:
   build:
-    image: cbrgm/drone-hugo:0.38
+    image: cbrgm/drone-hugo:0.38.1
     output: site # Output path
     validate: true
     when:
