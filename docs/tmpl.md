@@ -1,11 +1,11 @@
-# cbrgm/drone-hugo
+# drone-plugins/drone-hugo
 
-[![GitHub release](https://img.shields.io/github/release/cbrgm/drone-hugo.svg)](https://github.com/cbrgm/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v<HUGO_VERSION>-ff69b4.svg)
-[![Docker Pulls](https://img.shields.io/docker/pulls/cbrgm/drone-hugo.svg)](https://hub.docker.com/r/cbrgm/drone-hugo/tags/)
+[![GitHub release](https://img.shields.io/github/release/drone-plugins/drone-hugo.svg)](https://github.com/drone-plugins/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v<HUGO_VERSION>-ff69b4.svg)
+[![Docker Pulls](https://img.shields.io/docker/pulls/drone-plugins/drone-hugo.svg)](https://hub.docker.com/r/drone-plugins/drone-hugo/tags/)
 
 **Automatically create static web page files using Hugo within your drone pipeline!**
 
-cbrgm/drone-hugo is:
+drone-plugins/drone-hugo is:
 
 - **Easy** to implement in your existing pipeline using `.drone.yml`
 - **Small** 21mb image size
@@ -18,7 +18,7 @@ The example below demonstrates how you can use the plugin to automatically creat
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:<HUGO_VERSION>
+    image: drone-plugins/drone-hugo:<HUGO_VERSION>
     validate: true
 ```
 
@@ -31,7 +31,7 @@ You can customize the paths for e. g. the theme, layout, content directory and o
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:<HUGO_VERSION>
+    image: drone-plugins/drone-hugo:<HUGO_VERSION>
 +   config: path/to/config
 +   content: path/to/content/
 +   layout: path/to/layout
@@ -48,13 +48,13 @@ You can also define a base URL directly in the pipeline, which is used when gene
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:<HUGO_VERSION>
+    image: drone-plugins/drone-hugo:<HUGO_VERSION>
     config: path/to/config
     content: path/to/content/
     output: path/to/public
     source: path/to/source
     theme: path/themes/THEMENAME/
-+   url: https://cbrgm.de
++   url: https://drone-plugins.de
     validate: true
 ```
 
@@ -69,7 +69,7 @@ You can set the `buildDrafts`, `buildExpired`, `buildFuture` settings to configu
 ```yml
 pipeline:
   hugo:
-    image: cbrgm/drone-hugo:<HUGO_VERSION>
+    image: drone-plugins/drone-hugo:<HUGO_VERSION>
 +   buildDrafts: true
 +   buildExpired: true
 +   buildFuture: true
@@ -78,7 +78,7 @@ pipeline:
     output: path/to/public
     source: path/to/source
     theme: path/themes/THEMENAME/
-    url: https://cbrgm.de
+    url: https://drone-plugins.de
     validate: true
 ```
 
@@ -89,14 +89,14 @@ Here is a short example of how to define a pipeline that automatically generates
 ```yml
 pipeline:
   build:
-    image: cbrgm/drone-hugo:<HUGO_VERSION>
+    image: drone-plugins/drone-hugo:<HUGO_VERSION>
     output: site # Output path
     validate: true
     when:
       branch: [ master ]
   publish:
     image: appleboy/drone-scp
-    host: cbrgm.de
+    host: drone-plugins.de
     username: webuser
     password: xxxxxxx
     port: 54321
@@ -109,7 +109,7 @@ You can also use secrets to hide credentials:
 ```yml
 pipeline:
   build:
-    image: cbrgm/drone-hugo:<HUGO_VERSION>
+    image: drone-plugins/drone-hugo:<HUGO_VERSION>
     output: site # Output path
     validate: true
     when:
@@ -117,7 +117,7 @@ pipeline:
   publish:
     image: appleboy/drone-scp
 +   secrets: [ ssh_username, ssh_password ]
-    host: cbrgm.de
+    host: drone-plugins.de
 -   username: webuser
 -   password: xxxxxxx
     port: 54321
@@ -142,7 +142,7 @@ docker run --rm \
   -e PLUGIN_VALIDATE=false \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  cbrgm/drone-hugo:latest
+  drone-plugins/drone-hugo:latest
 ```
 
 ## Parameter Reference
