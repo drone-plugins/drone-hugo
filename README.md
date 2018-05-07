@@ -1,7 +1,7 @@
-# drone-plugins/drone-hugo
+# plugins/hugo
 
 [![GitHub release](https://img.shields.io/github/release/drone-plugins/drone-hugo.svg)](https://github.com/drone-plugins/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.40.2-ff69b4.svg)
-[![Docker Pulls](https://img.shields.io/docker/pulls/drone-plugins/drone-hugo.svg)](https://hub.docker.com/r/drone-plugins/drone-hugo/tags/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/plugins/hugo.svg)](https://hub.docker.com/r/plugins/hugo/tags/)
 
 **Automatically create static web page files using Hugo within your drone pipeline!**
 
@@ -18,7 +18,7 @@ The example below demonstrates how you can use the plugin to automatically creat
 ```yml
 pipeline:
   hugo:
-    image: drone-plugins/drone-hugo:0.40.2
+    image: plugins/hugo:0.40.2
     validate: true
 ```
 
@@ -31,7 +31,7 @@ You can customize the paths for e. g. the theme, layout, content directory and o
 ```yml
 pipeline:
   hugo:
-    image: drone-plugins/drone-hugo:0.40.2
+    image: plugins/hugo:0.40.2
 +   config: path/to/config
 +   content: path/to/content/
 +   layout: path/to/layout
@@ -48,7 +48,7 @@ You can also define a base URL directly in the pipeline, which is used when gene
 ```yml
 pipeline:
   hugo:
-    image: drone-plugins/drone-hugo:0.40.2
+    image: plugins/hugo:0.40.2
     config: path/to/config
     content: path/to/content/
     output: path/to/public
@@ -69,7 +69,7 @@ You can set the `buildDrafts`, `buildExpired`, `buildFuture` settings to configu
 ```yml
 pipeline:
   hugo:
-    image: drone-plugins/drone-hugo:0.40.2
+    image: plugins/hugo:0.40.2
 +   buildDrafts: true
 +   buildExpired: true
 +   buildFuture: true
@@ -89,7 +89,7 @@ Here is a short example of how to define a pipeline that automatically generates
 ```yml
 pipeline:
   build:
-    image: drone-plugins/drone-hugo:0.40.2
+    image: plugins/hugo:0.40.2
     output: site # Output path
     validate: true
     when:
@@ -109,7 +109,7 @@ You can also use secrets to hide credentials:
 ```yml
 pipeline:
   build:
-    image: drone-plugins/drone-hugo:0.40.2
+    image: plugins/hugo:0.40.2
     output: site # Output path
     validate: true
     when:
@@ -142,7 +142,7 @@ docker run --rm \
   -e PLUGIN_VALIDATE=false \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  drone-plugins/drone-hugo:latest
+  plugins/hugo:latest
 ```
 
 ## Parameter Reference
