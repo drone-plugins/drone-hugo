@@ -1,4 +1,4 @@
-# plugins/hugo
+# drone-hugo
 
 [![GitHub release](https://img.shields.io/github/release/drone-plugins/drone-hugo.svg)](https://github.com/drone-plugins/drone-hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.40.2-ff69b4.svg)
 [![Docker Pulls](https://img.shields.io/docker/pulls/plugins/hugo.svg)](https://hub.docker.com/r/plugins/hugo/tags/)
@@ -96,7 +96,7 @@ pipeline:
       branch: [ master ]
   publish:
     image: appleboy/drone-scp
-    host: drone-plugins.de
+    host: example.com
     username: webuser
     password: xxxxxxx
     port: 54321
@@ -117,7 +117,7 @@ pipeline:
   publish:
     image: appleboy/drone-scp
 +   secrets: [ ssh_username, ssh_password ]
-    host: drone-plugins.de
+    host: example.com
 -   username: webuser
 -   password: xxxxxxx
     port: 54321
