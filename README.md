@@ -54,7 +54,7 @@ pipeline:
     output: path/to/public
     source: path/to/source
     theme: path/themes/THEMENAME/
-+   url: https://drone-plugins.de
++   url: https://example.com
     validate: true
 ```
 
@@ -78,7 +78,7 @@ pipeline:
     output: path/to/public
     source: path/to/source
     theme: path/themes/THEMENAME/
-    url: https://drone-plugins.de
+    url: https://example.com
     validate: true
 ```
 
