@@ -3,6 +3,7 @@
 set -e
 
 # Assign default variables if not set
+PLUGIN_VERSION=${PLUGIN_VERSION:-"false"}
 PLUGIN_BUILDDRAFTS=${PLUGIN_BUILDDRAFTS:-"false"}
 PLUGIN_BUILDEXPIRED=${PLUGIN_BUILDEXPIRED:-"false"}
 PLUGIN_BUILDFUTURE=${PLUGIN_BUILDFUTURE:-"false"}
@@ -15,18 +16,28 @@ PLUGIN_THEME=${PLUGIN_THEME:-"false"}
 PLUGIN_URL=${PLUGIN_URL:-"false"}
 PLUGIN_VALIDATE=${PLUGIN_VALIDATE:-"false"}
 
+# The hugo command
+HUGO_COMMAND="hugo"
+
 function addArgument {
   echo $1
   HUGO_COMMAND="${HUGO_COMMAND} $1"
 }
 
-# Hugo Command
-HUGO_COMMAND="hugo"
+# Download hugo binary if version attribute is set. When not set, use the one shipped binary inside container
+if [[ $PLUGIN_VERSION != "false" ]] ; then
+  echo "Downloading hugo version v${PLUGIN_VERSION}..."
+  mkdir /temp/
+  wget -qO- https://github.com/gohugoio/hugo/releases/download/v${PLUGIN_VERSION}/hugo_${PLUGIN_VERSION}_Linux-64bit.tar.gz | tar xz -C /temp/
+  mv /temp/hugo /bin/hugo
+  rm  -rf /temp
+  echo "Using hugo v${PLUGIN_VERSION}..."
+fi
 
 # Validate config file
 if [[ $PLUGIN_VALIDATE = true ]]; then
-  echo "Checking config file ${PLUGIN_CONFIG}..."
   if [[ $PLUGIN_CONFIG != "false" ]]; then
+    echo "Checking config file ${PLUGIN_CONFIG}..."
     hugo check --config ${PLUGIN_CONFIG}
   else
     hugo check
