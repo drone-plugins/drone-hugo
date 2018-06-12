@@ -1,7 +1,6 @@
 drone-hugo
 
-[![GitHub release](https://img.shields.io/github/release/drone-plugins/drone-hugo.svg)](https://github.com/plugins/hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.40.2-ff69b4.svg)
-[![Docker Pulls](https://img.shields.io/docker/pulls/plugins/hugo.svg)](https://hub.docker.com/r/plugins/hugo/tags/)
+[![GitHub release](https://img.shields.io/github/release/drone-plugins/drone-hugo.svg)](https://github.com/plugins/hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.42-ff69b4.svg)
 
 **Automatically create static web page files using Hugo within your drone pipeline!**
 
