@@ -1,6 +1,6 @@
-# drone-hugo
+drone-hugo
 
-[![GitHub release](https://img.shields.io/github/release/drone-plugins/drone-hugo.svg)](https://github.com/plugins/hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v<HUGO_VERSION>-ff69b4.svg)
+[![GitHub release](https://img.shields.io/github/release/drone-plugins/drone-hugo.svg)](https://github.com/plugins/hugo/releases) ![](https://img.shields.io/badge/hugo%20version-v0.40.2-ff69b4.svg)
 [![Docker Pulls](https://img.shields.io/docker/pulls/plugins/hugo.svg)](https://hub.docker.com/r/plugins/hugo/tags/)
 
 **Automatically create static web page files using Hugo within your drone pipeline!**
@@ -17,9 +17,9 @@ The example below demonstrates how you can use the plugin to automatically creat
 
 ```yml
 pipeline:
-  hugo:
-    image: plugins/hugo:<RELEASE>
-    validate: true
+ hugo:
+   image: plugins/hugo:latest
+   validate: true
 ```
 
 `validate` allows you to check your configuration file for errors before generating the files.
@@ -30,15 +30,15 @@ You can customize the paths for e. g. the theme, layout, content directory and o
 
 ```yml
 pipeline:
-  hugo:
-    image: plugins/hugo:<RELEASE>
+ hugo:
+   image: plugins/hugo:latest
 +   config: path/to/config
 +   content: path/to/content/
 +   layout: path/to/layout
 +   output: path/to/public
 +   source: path/to/source
 +   theme: path/themes/THEMENAME/
-    validate: true
+   validate: true
 ```
 
 ### Set hostname (and path) to the root
@@ -47,15 +47,15 @@ You can also define a base URL directly in the pipeline, which is used when gene
 
 ```yml
 pipeline:
-  hugo:
-    image: plugins/hugo:<RELEASE>
-    config: path/to/config
-    content: path/to/content/
-    output: path/to/public
-    source: path/to/source
-    theme: path/themes/THEMENAME/
+ hugo:
+   image: plugins/hugo:latest
+   config: path/to/config
+   content: path/to/content/
+   output: path/to/public
+   source: path/to/source
+   theme: path/themes/THEMENAME/
 +   url: https://example.com
-    validate: true
+   validate: true
 ```
 
 ### Build sites and include expired, drafts or future content
@@ -68,18 +68,18 @@ You can set the `buildDrafts`, `buildExpired`, `buildFuture` settings to configu
 
 ```yml
 pipeline:
-  hugo:
-    image: plugins/hugo:<RELEASE>
+ hugo:
+   image: plugins/hugo:latest
 +   buildDrafts: true
 +   buildExpired: true
 +   buildFuture: true
-    config: path/to/config
-    content: path/to/content/
-    output: path/to/public
-    source: path/to/source
-    theme: path/themes/THEMENAME/
-    url: https://example.com
-    validate: true
+   config: path/to/config
+   content: path/to/content/
+   output: path/to/public
+   source: path/to/source
+   theme: path/themes/THEMENAME/
+   url: https://example.com
+   validate: true
 ```
 
 ### **Example**: Generate Hugo static files and publish them to remote directory using scp
@@ -88,67 +88,67 @@ Here is a short example of how to define a pipeline that automatically generates
 
 ```yml
 pipeline:
-  build:
-    image: plugins/hugo:<RELEASE>
-    output: site # Output path
-    validate: true
-    when:
-      branch: [ master ]
-  publish:
-    image: appleboy/drone-scp
-    host: example.com
-    username: webuser
-    password: xxxxxxx
-    port: 54321
-    target: /var/www/ # Path to your web directory
-    source: site/* # Copy all files from output path
+ build:
+   image: plugins/hugo:latest
+   output: site # Output path
+   validate: true
+   when:
+     branch: [ master ]
+ publish:
+   image: appleboy/drone-scp
+   host: example.com
+   username: webuser
+   password: xxxxxxx
+   port: 54321
+   target: /var/www/ # Path to your web directory
+   source: site/* # Copy all files from output path
 ```
 
 You can also use secrets to hide credentials:
 
 ```yml
 pipeline:
-  build:
-    image: plugins/hugo:<RELEASE>
-    output: site # Output path
-    validate: true
-    when:
-      branch: [ master ]
-  publish:
-    image: appleboy/drone-scp
+ build:
+   image: plugins/hugo:latest
+   output: site # Output path
+   validate: true
+   when:
+     branch: [ master ]
+ publish:
+   image: appleboy/drone-scp
 +   secrets: [ ssh_username, ssh_password ]
-    host: example.com
+   host: example.com
 -   username: webuser
 -   password: xxxxxxx
-    port: 54321
-    target: /var/www/ # Path to your web directory
-    source: site/* # Copy all files from output path
+   port: 54321
+   target: /var/www/ # Path to your web directory
+   source: site/* # Copy all files from output path
 ```
 
 ## Basic Usage using a Docker Container
 
 ```bash
 docker run --rm \
-  -e PLUGIN_VERSION=<HUGO_VERSION> \
-  -e PLUGIN_BUILDDRAFTS=false \
-  -e PLUGIN_BUILDEXPIRED=false \
-  -e PLUGIN_BUILDFUTURE=false \
-  -e PLUGIN_CONFIG=false \
-  -e PLUGIN_CONTENT=false \
-  -e PLUGIN_LAYOUT=false \
-  -e PLUGIN_OUTPUT=false \
-  -e PLUGIN_SOURCE=false \
-  -e PLUGIN_THEME=false \
-  -e PLUGIN_OUTPUT=false \
-  -e PLUGIN_VALIDATE=false \
-  -v $(pwd):$(pwd) \
-  -w $(pwd) \
-  plugins/hugo:latest
+ -e PLUGIN_VERSION=0.40.2 \
+ -e PLUGIN_BUILDDRAFTS=false \
+ -e PLUGIN_BUILDEXPIRED=false \
+ -e PLUGIN_BUILDFUTURE=false \
+ -e PLUGIN_CONFIG=false \
+ -e PLUGIN_CONTENT=false \
+ -e PLUGIN_LAYOUT=false \
+ -e PLUGIN_OUTPUT=false \
+ -e PLUGIN_SOURCE=false \
+ -e PLUGIN_THEME=false \
+ -e PLUGIN_OUTPUT=false \
+ -e PLUGIN_VALIDATE=false \
+ -v $(pwd):$(pwd) \
+ -w $(pwd) \
+ plugins/hugo:latest
 ```
 
 ## Parameter Reference
 
-`version` - the hugo version to be used, if not set use v.<HUGO_VERSION>  
+`hugoVersion` - the hugo version to be used, if not set use v.<HUGO_VERSION>  
 `buildDrafts` - include content marked as draft<br>
 `buildExpired` - include expired content<br>
 `buildFuture` - include content with publishdate in the future<br>

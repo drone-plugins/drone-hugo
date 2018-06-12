@@ -1,4 +1,4 @@
-FROM plugins/base:amd64
+FROM plugins/base:arm64
 
 LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" \
   org.label-schema.name="Drone Hugo" \
@@ -10,7 +10,7 @@ ARG HUGO_ARCH
 ENV PLUGIN_HUGO_ARCH=$HUGO_ARCH
 ENV PLUGIN_HUGO_SHIPPED_VERSION=$HUGO_VERSION
 
-ADD release/linux/amd64/drone-hugo /bin/
+ADD release/linux/arm64/drone-hugo /bin/
 RUN apk update && \
     apk --no-cache add git && \
     chmod +x bin/drone-hugo && \
