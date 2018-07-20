@@ -15,6 +15,7 @@ PLUGIN_SOURCE=${PLUGIN_SOURCE:-"false"}
 PLUGIN_THEME=${PLUGIN_THEME:-"false"}
 PLUGIN_URL=${PLUGIN_URL:-"false"}
 PLUGIN_VALIDATE=${PLUGIN_VALIDATE:-"false"}
+PLUGIN_CACHEDIR=${PLUGIN_CACHEDIR:-"false"}
 
 # The hugo command
 HUGO_COMMAND="hugo"
@@ -48,6 +49,7 @@ fi
 if [[ $PLUGIN_BUILDDRAFTS != "false" ]] ; then addArgument "-D" ; fi
 if [[ $PLUGIN_BUILDEXPIRED != "false" ]] ; then addArgument "-E" ; fi
 if [[ $PLUGIN_BUILDFUTURE != "false" ]] ; then addArgument "-F" ; fi
+if [[ $PLUGIN_CACHEDIR != "false" ]] ; then addArgument "--cacheDir ${PLUGIN_CACHEDIR}" ; fi
 if [[ $PLUGIN_CONFIG != "false" ]] ; then addArgument "--config ${PLUGIN_CONFIG}" ; fi
 if [[ $PLUGIN_CONTENT != "false" ]] ; then addArgument "--contentDir ${PLUGIN_CONFIG}" ; fi
 if [[ $PLUGIN_LAYOUT != "false" ]] ; then addArgument "--layoutDir ${PLUGIN_LAYOUT}" ; fi
