@@ -133,6 +133,7 @@ docker run --rm \
   -e PLUGIN_BUILDDRAFTS=false \
   -e PLUGIN_BUILDEXPIRED=false \
   -e PLUGIN_BUILDFUTURE=false \
+  -e PLUGIN_CACHEDIR=false \
   -e PLUGIN_CONFIG=false \
   -e PLUGIN_CONTENT=false \
   -e PLUGIN_LAYOUT=false \
@@ -152,6 +153,7 @@ docker run --rm \
 `buildDrafts` - include content marked as draft<br>
 `buildExpired` - include expired content<br>
 `buildFuture` - include content with publishdate in the future<br>
+`cacheDir` - change cache directory (useful when using caching plugins)<br>
 `config` - config file (default is path/config.yaml|json|toml)<br>
 `content` - filesystem path to content directory<br>
 `layout` - filesystem path to layout directory<br>
