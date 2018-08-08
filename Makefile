@@ -1,4 +1,4 @@
-.PHONY: test build amd64 arm64 arm i386
+.PHONY: test build amd64 arm64 arm
 
 test:
 	dep ensure
