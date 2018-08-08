@@ -5,8 +5,8 @@ LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" \
   org.label-schema.vendor="Drone.IO Community" \
   org.label-schema.schema-version="1.0"
 
-ARG HUGO_VERSION
-ARG HUGO_ARCH
+ENV HUGO_VERSION=0.46
+ENV HUGO_ARCH=arm64
 ENV PLUGIN_HUGO_ARCH=$HUGO_ARCH
 ENV PLUGIN_HUGO_SHIPPED_VERSION=$HUGO_VERSION
 
