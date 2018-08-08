@@ -11,7 +11,6 @@ import (
 type (
 	Plugin struct {
 		Config         Config
-		Architecture   string
 		BuildInVersion string
 	}
 
@@ -40,7 +39,7 @@ func (p Plugin) Exec() error {
 	// Check if buildIn plugin version equals
 	// plugin version declared in drone.yml
 	if !versionsEqual(p.BuildInVersion, p.Config.HugoVersion) {
-		hugoPath, err := download.Get(p.Config.HugoVersion, p.Architecture)
+		hugoPath, err := download.Get(p.Config.HugoVersion)
 		if err != nil {
 			return err
 		}

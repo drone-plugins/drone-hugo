@@ -111,7 +111,6 @@ func run(c *cli.Context) error {
 			Theme:        c.String("theme"),
 			Url:          c.String("url"),
 		},
-		Architecture:   os.Getenv("PLUGIN_HUGO_ARCH"),
 		BuildInVersion: os.Getenv("PLUGIN_HUGO_SHIPPED_VERSION"),
 	}
 	return plugin.Exec()

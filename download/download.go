@@ -12,13 +12,27 @@ import (
 	"github.com/pkg/errors"
 	"log"
 	"net/http"
+	"runtime"
 )
 
 var (
 	_downloadURL = "https://github.com/gohugoio/hugo/releases/download/v%s/hugo_%s_Linux-%s.tar.gz"
 )
 
-func downloadURL(version string, archType string) string {
+func downloadURL(version string) string {
+	var archType string
+	switch runtime.GOARCH {
+	case "amd64":
+		archType = "64bit"
+	case "arm64":
+		archType = "arm64"
+	case "arm":
+		archType = "arm"
+	case "386":
+		archType = "32bit"
+	default:
+		archType = "unsupported"
+	}
 	return fmt.Sprintf(_downloadURL, version, version, archType)
 }
 
@@ -32,8 +46,8 @@ func getTempFile() (string, io.WriteCloser, error) {
 }
 
 // Get will download the specified hugo verion
-func Get(ver string, archType string) (string, error) {
-	resp, err := http.Get(downloadURL(ver, archType))
+func Get(version string) (string, error) {
+	resp, err := http.Get(downloadURL(version))
 	if err != nil {
 		return "", errors.Wrap(err, "")
 	}
