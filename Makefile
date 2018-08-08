@@ -1,4 +1,4 @@
-.PHONY: test build amd64 arm64 arm
+.PHONY: test build amd64 arm64 arm i386
 
 test:
 	dep ensure
@@ -8,10 +8,13 @@ build: .drone.sh
 	./.drone.sh
 
 amd64: Dockerfile
-	docker build -t "plugins/hugo:amd64" --build-arg HUGO_VERSION="$(hugo)" --build-arg HUGO_ARCH=64bit .
+	docker build -t "plugins/hugo:amd64" .
 
 arm64: Dockerfile.arm64
-	docker build -t "plugins/hugo:arm64" --build-arg HUGO_VERSION="$(hugo)" --build-arg HUGO_ARCH=arm64 .
+	docker build -t "plugins/hugo:arm64" .
 
 arm: Dockerfile.arm
-	docker build -t "plugins/hugo:arm" --build-arg HUGO_VERSION="$(hugo)" --build-arg HUGO_ARCH=arm .
+	docker build -t "plugins/hugo:arm" .
+
+arm: Dockerfile.i386
+	docker build -t "plugins/hugo:i386" .

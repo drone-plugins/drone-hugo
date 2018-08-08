@@ -67,48 +67,67 @@ pipeline:
   #         go build -v -ldflags "-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/arm/drone-hugo github.com/drone-plugins/drone-hugo/cmd/drone-hugo
   #       fi
 
+  # build_linux_386:
+  #   image: golang:1.10
+  #   pull: true
+  #   group: build
+  #   environment:
+  #     - GOOS=linux
+  #     - GOARCH=386
+  #     - CGO_ENABLED=0
+  #   commands:
+  #     - |
+  #       if test "${DRONE_TAG}" = ""; then
+  #         go build -v -ldflags "-X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/i386/drone-hugo github.com/drone-plugins/drone-hugo/cmd/drone-hugo
+  #       else
+  #         go build -v -ldflags "-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}" -a -o release/linux/i386/drone-hugo github.com/drone-plugins/drone-hugo/cmd/drone-hugo
+  #       fi
+
   publish_linux_amd64:
     image: plugins/docker:17.12
     pull: true
-    secrets: [ docker_username, docker_password, hugo_version ]
+    secrets: [ docker_username, docker_password ]
     group: docker
     repo: plugins/hugo
     auto_tag: true
     auto_tag_suffix: linux-amd64
     dockerfile: Dockerfile
-    build_args:
-      - HUGO_VERSION=${HUGO_VERSION}
-      - HUGO_ARCH=64bit
     when:
       event: [ push, tag ]
 
   # publish_linux_arm64:
   #   image: plugins/docker:17.12
   #   pull: true
-  #   secrets: [ docker_username, docker_password, hugo_version ]
+  #   secrets: [ docker_username, docker_password ]
   #   group: docker
   #   repo: plugins/hugo
   #   auto_tag: true
   #   auto_tag_suffix: linux-arm64
   #   dockerfile: Dockerfile.arm64
-  #   build_args:
-  #     - HUGO_VERSION=${HUGO_VERSION}
-  #     - HUGO_ARCH=arm64
   #   when:
   #     event: [ push, tag ]
 
   # publish_linux_arm:
   #   image: plugins/docker:17.12
   #   pull: true
-  #   secrets: [ docker_username, docker_password, hugo_version ]
+  #   secrets: [ docker_username, docker_password ]
   #   group: docker
   #   repo: plugins/hugo
   #   auto_tag: true
   #   auto_tag_suffix: linux-arm
   #   dockerfile: Dockerfile.arm
-  #   build_args:
-  #     - HUGO_VERSION=${HUGO_VERSION}
-  #     - HUGO_ARCH=arm
+  #   when:
+  #     event: [ push, tag ]
+
+  # publish_linux_386:
+  #   image: plugins/docker:17.12
+  #   pull: true
+  #   secrets: [ docker_username, docker_password ]
+  #   group: docker
+  #   repo: plugins/hugo
+  #   auto_tag: true
+  #   auto_tag_suffix: linux-arm
+  #   dockerfile: Dockerfile.arm
   #   when:
   #     event: [ push, tag ]
 
