@@ -1,29 +1,20 @@
-.PHONY: all test push build release clean
+.PHONY: test build amd64 arm64 arm i386
 
-README_TEMPLATE=./docs/tmpl.md
+test:
+	dep ensure
+	go test ./...
 
-all: release
+build: .drone.sh
+	./.drone.sh
 
-test: Dockerfile drone-hugo.sh
-	docker build -t "plugins/hugo:$(release)_test" --build-arg HUGO_VERSION="$(hugo)" .
+amd64: Dockerfile
+	docker build -t "plugins/hugo:amd64" .
 
-build: Dockerfile drone-hugo.sh
-	docker build -t "plugins/hugo:$(release)" --build-arg HUGO_VERSION="$(hugo)" .
-	docker build -t "plugins/hugo:latest" --build-arg HUGO_VERSION="$(hugo)" .
+arm64: Dockerfile.arm64
+	docker build -t "plugins/hugo:arm64" .
 
-push: build
-	docker push "plugins/hugo:$(release)"
-	docker push "plugins/hugo:latest"
+arm: Dockerfile.arm
+	docker build -t "plugins/hugo:arm" .
 
-release: $(README_TEMPLATE) test push build clean
-	sed 's/<HUGO_VERSION>/$(hugo)/g' $(README_TEMPLATE) > temp.md
-	sed 's/<RELEASE>/$(release)/g' temp.md > README.md
-	rm -rf temp.md
-	git add .
-	git commit -m "Updated to the latest Hugo version v.$(hugo), see https://github.com/gohugoio/hugo/releases"
-	git push origin master
-
-clean:
-	docker rmi plugins/hugo:$(release)
-	docker rmi plugins/hugo:latest
-	docker rmi plugins/hugo:$(release)_test
+arm: Dockerfile.i386
+	docker build -t "plugins/hugo:i386" .
