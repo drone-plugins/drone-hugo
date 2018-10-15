@@ -38,3 +38,17 @@ docker run --rm \
   -w $(pwd) \
   plugins/hugo:latest
 ```
+
+### Usage in Drone
+
+Put the following in your .drone.yml file:
+
+```yaml
+pipeline:
+  hugo:
+    image: plugins/hugo:latest
+    validate: true
+```
+
+[Drone Plugin documentation](http://plugins.drone.io/drone-plugins/drone-hugo/)
+
