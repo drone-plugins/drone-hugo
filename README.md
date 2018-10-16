@@ -1,6 +1,6 @@
 # drone-hugo
 
-Automatically create static web page files using [hugo](https://github.com/gohugoio/hugo) within your drone pipeline!
+Automatically create static web page files using [hugo](https://github.com/gohugoio/hugo) within your drone pipeline! For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-hugo/).
 
 ## Build
 
@@ -38,17 +38,4 @@ docker run --rm \
   -w $(pwd) \
   plugins/hugo:latest
 ```
-
-### Usage in Drone
-
-Put the following in your .drone.yml file:
-
-```yaml
-pipeline:
-  hugo:
-    image: plugins/hugo:latest
-    validate: true
-```
-
-[Drone Plugin documentation](http://plugins.drone.io/drone-plugins/drone-hugo/)
 
