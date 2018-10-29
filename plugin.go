@@ -18,6 +18,7 @@ type (
 		BuildDrafts  bool
 		BuildExpired bool
 		BuildFuture  bool
+		CacheDir     string
 		Config       string
 		Content      string
 		Layout       string
@@ -75,6 +76,9 @@ func commandBuild(config Config) *exec.Cmd {
 		args = append(args, "-F")
 	}
 	// add string args
+	if config.CacheDir != "" {
+		args = append(args, "--cacheDir", config.CacheDir)
+	}
 	if config.Config != "" {
 		args = append(args, "--config", config.Config)
 	}

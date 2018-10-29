@@ -26,6 +26,7 @@ docker run --rm \
   -e PLUGIN_BUILDDRAFTS=false \
   -e PLUGIN_BUILDEXPIRED=false \
   -e PLUGIN_BUILDFUTURE=false \
+  -e PLUGIN_CACHEDIR=false \
   -e PLUGIN_CONFIG=false \
   -e PLUGIN_CONTENT=false \
   -e PLUGIN_LAYOUT=false \
