@@ -37,6 +37,12 @@ func main() {
 			EnvVar: "PLUGIN_BUILDFUTURE",
 		},
 		cli.StringFlag{
+			Name:   "cacheDir",
+			Usage:  "change cache directory (useful when using caching plugins)",
+			EnvVar: "PLUGIN_CACHEDIR",
+			Value:  "",
+		},
+		cli.StringFlag{
 			Name:   "config",
 			Usage:  "config file (default is path/config.yaml|json|toml)",
 			EnvVar: "PLUGIN_CONFIG",
