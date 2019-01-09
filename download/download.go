@@ -6,13 +6,13 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
+	"net/http"
 	"os"
+	"runtime"
 	"strings"
 
 	"github.com/pkg/errors"
-	"log"
-	"net/http"
-	"runtime"
 )
 
 var (
