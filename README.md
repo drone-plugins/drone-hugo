@@ -7,7 +7,6 @@
 [![](https://images.microbadger.com/badges/image/plugins/hugo.svg)](https://microbadger.com/images/plugins/hugo "Get your own image badge on microbadger.com")
 [![Go Doc](https://godoc.org/github.com/drone-plugins/drone-hugo?status.svg)](http://godoc.org/github.com/drone-plugins/drone-hugo)
 [![Go Report](https://goreportcard.com/badge/github.com/drone-plugins/drone-hugo)](https://goreportcard.com/report/github.com/drone-plugins/drone-hugo)
-[![](https://images.microbadger.com/badges/image/plugins/hugo.svg)](https://microbadger.com/images/plugins/hugo "Get your own image badge on microbadger.com")
 
 Automatically create static web page files using [hugo](https://github.com/gohugoio/hugo) within your drone pipeline! For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-hugo/).
 
