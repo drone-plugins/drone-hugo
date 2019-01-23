@@ -51,7 +51,7 @@ local PipelineBuild(os="linux", arch="amd64") = {
         GO111MODULE: "on",
       },
       commands: [
-        "go build -v -ldflags \"-X main.build=${DRONE_BUILD_NUMBER}\" -a -o release/" + os + "/" + arch + "/drone-hugo",
+        "go build -v -ldflags \"-X main.build=${DRONE_BUILD_NUMBER}\" -a -o release/" + os + "/" + arch + "/drone-hugo ./cmd/drone-hugo",
       ],
       when: {
         event: [ "push", "pull_request" ],
@@ -66,7 +66,7 @@ local PipelineBuild(os="linux", arch="amd64") = {
         GO111MODULE: "on",
       },
       commands: [
-        "go build -v -ldflags \"-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}\" -a -o release/" + os + "/" + arch + "/drone-hugo",
+        "go build -v -ldflags \"-X main.version=${DRONE_TAG##v} -X main.build=${DRONE_BUILD_NUMBER}\" -a -o release/" + os + "/" + arch + "/drone-hugo ./cmd/drone-hugo",
       ],
       when: {
         event: [ "tag" ],
