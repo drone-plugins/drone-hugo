@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
-	"github.com/drone-plugins/drone-hugo"
 	"github.com/urfave/cli"
 )
 
@@ -101,8 +99,8 @@ func main() {
 }
 
 func run(c *cli.Context) error {
-	plugin := hugo.Plugin{
-		Config: hugo.Config{
+	plugin := Plugin{
+		Config: Config{
 			HugoVersion:  c.String("hugoVersion"),
 			BuildDrafts:  c.Bool("buildDrafts"),
 			BuildExpired: c.Bool("buildExpired"),
