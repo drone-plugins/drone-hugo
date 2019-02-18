@@ -8,27 +8,35 @@
 [![Go Doc](https://godoc.org/github.com/drone-plugins/drone-hugo?status.svg)](http://godoc.org/github.com/drone-plugins/drone-hugo)
 [![Go Report](https://goreportcard.com/badge/github.com/drone-plugins/drone-hugo)](https://goreportcard.com/report/github.com/drone-plugins/drone-hugo)
 
-Automatically create static web page files using [hugo](https://github.com/gohugoio/hugo) within your drone pipeline! For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-hugo/).
+Automatically create static web page files using [Hugo](https://github.com/gohugoio/hugo) within your Drone pipeline. For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-hugo/).
 
 ## Build
 
-Build the binaries with the following commands:
+Build the binary with the following command:
 
-```go
-make build
+```console
+export GOOS=linux
+export GOARCH=amd64
+export CGO_ENABLED=0
+export GO111MODULE=on
+
+go build -v -a -tags netgo -o release/linux/amd64/drone-hugo
 ```
 
 ## Docker
 
-Build the Docker image with the following commands:
+Build the Docker image with the following command:
 
-```bash
-make [amd64,arm64,amd] hugo=0.00.0
+```console
+docker build \
+  --label org.label-schema.build-date=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+  --label org.label-schema.vcs-ref=$(git rev-parse --short HEAD) \
+  --file docker/Dockerfile.linux.amd64 --tag plugins/hugo .
 ```
 
 ### Usage
 
-```bash
+```console
 docker run --rm \
   -e PLUGIN_HUGO_VERSION=0.00.0 \
   -e PLUGIN_BUILDDRAFTS=false \

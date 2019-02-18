@@ -1,17 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
-	"github.com/drone-plugins/drone-hugo"
 	"github.com/urfave/cli"
 )
 
 var (
-	version = "0.0.0"
-	build   = "0"
+	version = "unknown"
 )
 
 func main() {
@@ -19,7 +16,7 @@ func main() {
 	app.Name = "hugo plugin"
 	app.Usage = "hugo plugin"
 	app.Action = run
-	app.Version = fmt.Sprintf("%s+%s", version, build)
+	app.Version = version
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
 			Name:   "buildDrafts",
@@ -102,8 +99,8 @@ func main() {
 }
 
 func run(c *cli.Context) error {
-	plugin := hugo.Plugin{
-		Config: hugo.Config{
+	plugin := Plugin{
+		Config: Config{
 			HugoVersion:  c.String("hugoVersion"),
 			BuildDrafts:  c.Bool("buildDrafts"),
 			BuildExpired: c.Bool("buildExpired"),
