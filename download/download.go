@@ -16,11 +16,19 @@ import (
 )
 
 var (
-	_downloadURL = "https://github.com/gohugoio/hugo/releases/download/v%s/hugo_%s_Linux-%s.tar.gz"
+	_downloadURL = "https://github.com/gohugoio/hugo/releases/download/v%s/%s_%s_Linux-%s.tar.gz"
 )
 
-func downloadURL(version string) string {
+func downloadURL(version string, extended bool) string {
 	var archType string
+	var binary string
+	
+	if extended {
+		binary = "hugo_extended"
+	} else {
+		binary = "hugo"
+	}
+	
 	switch runtime.GOARCH {
 	case "amd64":
 		archType = "64bit"
@@ -33,7 +41,7 @@ func downloadURL(version string) string {
 	default:
 		archType = "unsupported"
 	}
-	return fmt.Sprintf(_downloadURL, version, version, archType)
+	return fmt.Sprintf(_downloadURL, version, binary, version, archType)
 }
 
 func getTempFile() (string, io.WriteCloser, error) {
@@ -46,8 +54,8 @@ func getTempFile() (string, io.WriteCloser, error) {
 }
 
 // Get will download the specified hugo verion
-func Get(version string) (string, error) {
-	resp, err := http.Get(downloadURL(version))
+func Get(version string, extended bool) (string, error) {
+	resp, err := http.Get(downloadURL(version, extended))
 	if err != nil {
 		return "", errors.Wrap(err, "")
 	}

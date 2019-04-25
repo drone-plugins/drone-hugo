@@ -27,6 +27,7 @@ type (
 		Theme        string
 		Url          string
 		HugoVersion  string
+		HugoExtended bool
 		Validate     bool
 	}
 )
@@ -39,8 +40,8 @@ func (p Plugin) Exec() error {
 
 	// Check if buildIn plugin version equals
 	// plugin version declared in drone.yml
-	if !versionsEqual(p.BuildInVersion, p.Config.HugoVersion) {
-		hugoPath, err := download.Get(p.Config.HugoVersion)
+	if !versionsEqual(p.BuildInVersion, p.Config.HugoVersion, p.Config.HugoExtended) {
+		hugoPath, err := download.Get(p.Config.HugoVersion, p.Config.HugoExtended)
 		if err != nil {
 			return err
 		}
@@ -110,7 +111,11 @@ func trace(cmd *exec.Cmd) {
 	fmt.Fprintf(os.Stdout, "+ %s\n", strings.Join(cmd.Args, " "))
 }
 
-func versionsEqual(version string, toCompare string) bool {
+func versionsEqual(version string, toCompare string, extended bool) bool {
+	if extended {
+		return false
+	}
+
 	if toCompare == version || toCompare == "" {
 		return true
 	} else {
