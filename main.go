@@ -95,7 +95,7 @@ func main() {
 		cli.BoolFlag{
 			Name:   "hugoExtended",
 			Usage:  "If the hugo extended package should be used",
-			EnvVar: "PLUGIN_HUGO_EXTENDED",
+			EnvVar: "PLUGIN_EXTENDED",
 		},
 	}
 	if err := app.Run(os.Args); err != nil {
