@@ -92,6 +92,11 @@ func main() {
 			EnvVar: "PLUGIN_HUGO_VERSION",
 			Value:  "",
 		},
+		cli.BoolFlag{
+			Name:   "hugoExtended",
+			Usage:  "If the hugo extended package should be used",
+			EnvVar: "PLUGIN_EXTENDED",
+		},
 	}
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
@@ -102,6 +107,7 @@ func run(c *cli.Context) error {
 	plugin := Plugin{
 		Config: Config{
 			HugoVersion:  c.String("hugoVersion"),
+			HugoExtended: c.Bool("hugoExtended"),
 			BuildDrafts:  c.Bool("buildDrafts"),
 			BuildExpired: c.Bool("buildExpired"),
 			BuildFuture:  c.Bool("buildFuture"),
