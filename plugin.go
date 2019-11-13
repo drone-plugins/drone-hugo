@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/drone-plugins/drone-hugo/download"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/drone-plugins/drone-hugo/download"
 )
 
 type (
@@ -41,7 +42,12 @@ func (p Plugin) Exec() error {
 	// Check if buildIn plugin version equals
 	// plugin version declared in drone.yml
 	if !versionsEqual(p.BuildInVersion, p.Config.HugoVersion, p.Config.HugoExtended) {
-		hugoPath, err := download.Get(p.Config.HugoVersion, p.Config.HugoExtended)
+		hugoVersion := p.Config.HugoVersion
+		if hugoVersion == "" {
+			hugoVersion = p.BuildInVersion
+		}
+
+		hugoPath, err := download.Get(hugoVersion, p.Config.HugoExtended)
 		if err != nil {
 			return err
 		}
