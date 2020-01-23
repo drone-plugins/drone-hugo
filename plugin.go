@@ -19,6 +19,7 @@ type (
 		BuildDrafts  bool
 		BuildExpired bool
 		BuildFuture  bool
+		Minify       bool
 		CacheDir     string
 		Config       string
 		Content      string
@@ -81,6 +82,9 @@ func commandBuild(config Config) *exec.Cmd {
 	}
 	if config.BuildFuture {
 		args = append(args, "-F")
+	}
+	if config.Minify {
+		args = append(args, "--minify")
 	}
 	// add string args
 	if config.CacheDir != "" {
