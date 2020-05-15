@@ -19,24 +19,24 @@ func main() {
 	app.Version = version
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
-			Name:   "buildDrafts",
+			Name:   "drafts",
 			Usage:  " include content marked as draft",
-			EnvVar: "PLUGIN_BUILDDRAFTS",
+			EnvVar: "PLUGIN_BUILDDRAFTS,PLUGIN_DRAFTS",
 		},
 		cli.BoolFlag{
-			Name:   "buildExpired",
+			Name:   "expired",
 			Usage:  "include expired content",
-			EnvVar: "PLUGIN_BUILDEXPIRED",
+			EnvVar: "PLUGIN_BUILDEXPIRED,PLUGIN_EXPIRED",
 		},
 		cli.BoolFlag{
-			Name:   "buildFuture",
+			Name:   "future",
 			Usage:  "include content with publishdate in the future",
-			EnvVar: "PLUGIN_BUILDFUTURE",
+			EnvVar: "PLUGIN_BUILDFUTURE,PLUGIN_FUTURE",
 		},
 		cli.StringFlag{
-			Name:   "cacheDir",
+			Name:   "cache",
 			Usage:  "change cache directory (useful when using caching plugins)",
-			EnvVar: "PLUGIN_CACHEDIR",
+			EnvVar: "PLUGIN_CACHEDIR,PLUGIN_CACHE",
 			Value:  "",
 		},
 		cli.StringFlag{
@@ -87,13 +87,13 @@ func main() {
 			EnvVar: "PLUGIN_VALIDATE",
 		},
 		cli.StringFlag{
-			Name:   "hugoVersion",
+			Name:   "hugoversion",
 			Usage:  "the hugo version to be used",
-			EnvVar: "PLUGIN_HUGO_VERSION",
+			EnvVar: "PLUGIN_HUGO_VERSION,PLUGIN_VERSION",
 			Value:  "",
 		},
 		cli.BoolFlag{
-			Name:   "hugoExtended",
+			Name:   "extended",
 			Usage:  "If the hugo extended package should be used",
 			EnvVar: "PLUGIN_EXTENDED",
 		},
@@ -106,21 +106,22 @@ func main() {
 func run(c *cli.Context) error {
 	plugin := Plugin{
 		Config: Config{
-			HugoVersion:  c.String("hugoVersion"),
-			HugoExtended: c.Bool("hugoExtended"),
-			BuildDrafts:  c.Bool("buildDrafts"),
-			BuildExpired: c.Bool("buildExpired"),
-			BuildFuture:  c.Bool("buildFuture"),
-			Validate:     c.Bool("validate"),
-			Config:       c.String("config"),
-			Content:      c.String("content"),
-			Layout:       c.String("layout"),
-			Output:       c.String("output"),
-			Source:       c.String("source"),
-			Theme:        c.String("theme"),
-			Url:          c.String("url"),
+			URL:      c.String("url"),
+			Drafts:   c.Bool("drafts"),
+			Expired:  c.Bool("expired"),
+			Future:   c.Bool("future"),
+			Validate: c.Bool("validate"),
+			Config:   c.String("config"),
+			Content:  c.String("content"),
+			Layout:   c.String("layout"),
+			Output:   c.String("output"),
+			Source:   c.String("source"),
+			Theme:    c.String("theme"),
+			Version:  c.String("hugoversion"),
+			Extended: c.Bool("extended"),
 		},
 		BuildInVersion: os.Getenv("PLUGIN_HUGO_SHIPPED_VERSION"),
 	}
+
 	return plugin.Exec()
 }
