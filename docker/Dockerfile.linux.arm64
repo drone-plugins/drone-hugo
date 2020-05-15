@@ -1,3 +1,11 @@
+FROM arm64v8/golang:1.11-alpine AS build
+
+RUN apk add --no-cache git build-base && \
+  git clone --branch v0.58.3 https://github.com/gohugoio/hugo.git && \
+  cd hugo/ && \
+  CGO_ENABLED=0 go build -ldflags "-s -w -X github.com/gohugoio/hugo/common/hugo.buildDate=$(date +%Y-%m-%dT%H:%M:%SZ) -X github.com/gohugoio/hugo/common/hugo.commitHash=$(git rev-parse --short HEAD)" -o /tmp/hugo . && \
+  CGO_ENABLED=1 go build -tags extended -ldflags "-s -w -X github.com/gohugoio/hugo/common/hugo.buildDate=$(date +%Y-%m-%dT%H:%M:%SZ) -X github.com/gohugoio/hugo/common/hugo.commitHash=$(git rev-parse --short HEAD)" -o /tmp/hugo-extended
+
 FROM plugins/base:linux-arm64
 
 LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" \
@@ -5,13 +13,13 @@ LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" \
   org.label-schema.vendor="Drone.IO Community" \
   org.label-schema.schema-version="1.0"
 
-ENV HUGO_VERSION=0.58.3
-ENV HUGO_ARCH=arm64
-ENV PLUGIN_HUGO_ARCH=$HUGO_ARCH
-ENV PLUGIN_HUGO_SHIPPED_VERSION=$HUGO_VERSION
+RUN apk --no-cache add git libc6-compat libstdc++
 
-RUN apk --no-cache add git && \
-    wget -O- https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-${HUGO_ARCH}.tar.gz | tar xz -C /bin
+ENV PLUGIN_HUGO_ARCH=arm64
+ENV PLUGIN_HUGO_SHIPPED_VERSION=0.58.3
+
+COPY --from=build /tmp/hugo /bin/hugo
+COPY --from=build /tmp/hugo-extended /bin/hugo-extended
 
 ADD release/linux/arm64/drone-hugo /bin/
 ENTRYPOINT ["/bin/drone-hugo"]
