@@ -2,7 +2,7 @@
 
 set -e
 
-hugo_version=${HUGO_VERSION:-0.87.0}
+hugo_version=${HUGO_VERSION:-0.91.0}
 
 echo "downloading build dependencies..."
 apk add -U --no-cache git build-base

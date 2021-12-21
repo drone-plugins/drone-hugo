@@ -1,8 +1,8 @@
-ARG GO_VERSION=1.16.7
+ARG GO_VERSION=1.17
 
 FROM amd64/golang:$GO_VERSION-alpine AS hugo_builder
 
-ARG HUGO_VERSION=0.87.0
+ARG HUGO_VERSION=0.91.0
 
 ADD docker/scripts/build_hugo.sh  .
 
