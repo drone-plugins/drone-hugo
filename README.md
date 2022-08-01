@@ -8,7 +8,7 @@
 [![Go Doc](https://godoc.org/github.com/drone-plugins/drone-hugo?status.svg)](http://godoc.org/github.com/drone-plugins/drone-hugo)
 [![Go Report](https://goreportcard.com/badge/github.com/drone-plugins/drone-hugo)](https://goreportcard.com/report/github.com/drone-plugins/drone-hugo)
 
-Automatically create static web page files using [Hugo](https://github.com/gohugoio/hugo) within your Drone pipeline. For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-hugo/).
+Automatically create static web page files using [Hugo](https://github.com/gohugoio/hugo) within your Drone pipeline. For the usage information and a listing of the available options please take a look at [the docs](https://plugins.drone.io/plugins/hugo).
 
 ## Build
 
