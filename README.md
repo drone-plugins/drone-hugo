@@ -50,7 +50,6 @@ docker run --rm \
   -e PLUGIN_SOURCE=false \
   -e PLUGIN_THEME=false \
   -e PLUGIN_OUTPUT=false \
-  -e PLUGIN_VALIDATE=false \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
   plugins/hugo:latest

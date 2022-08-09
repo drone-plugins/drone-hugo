@@ -81,11 +81,6 @@ func main() {
 			EnvVar: "PLUGIN_URL",
 			Value:  "",
 		},
-		cli.BoolFlag{
-			Name:   "validate",
-			Usage:  "validate config file before generation",
-			EnvVar: "PLUGIN_VALIDATE",
-		},
 		cli.StringFlag{
 			Name:   "hugoversion",
 			Usage:  "the hugo version to be used",
@@ -110,7 +105,6 @@ func run(c *cli.Context) error {
 			Drafts:   c.Bool("drafts"),
 			Expired:  c.Bool("expired"),
 			Future:   c.Bool("future"),
-			Validate: c.Bool("validate"),
 			Config:   c.String("config"),
 			Content:  c.String("content"),
 			Layout:   c.String("layout"),
