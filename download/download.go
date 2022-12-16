@@ -5,7 +5,6 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"runtime"
@@ -54,7 +53,7 @@ func Get(version string, extended bool) (string, error) {
 		}
 
 		if strings.HasSuffix(h.Name, "hugo") {
-			io.Copy(hugoBin, targz)
+			_, _ = io.Copy(hugoBin, targz)
 
 			if err := os.Chmod(hugoPath, 0755); err != nil {
 				return "", err
@@ -104,12 +103,12 @@ func download(version string, extended bool) string {
 }
 
 func tempfile() (string, io.WriteCloser, error) {
-	d, err := ioutil.TempDir("", "")
+	dName, err := os.MkdirTemp("", "hugo")
 
 	if err != nil {
 		return "", nil, err
 	}
 
-	f, err := ioutil.TempFile(d, "")
+	f, err := os.CreateTemp(dName, "")
 	return f.Name(), f, err
 }
