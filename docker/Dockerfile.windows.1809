@@ -8,5 +8,5 @@ LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" `
 
 # TODO: install required tools
 
-ADD release\drone-hugo.exe c:\drone-hugo.exe
+ADD release/windows/amd64/drone-hugo.exe c:\drone-hugo.exe
 ENTRYPOINT [ "c:\\drone-hugo.exe" ]
