@@ -1,4 +1,7 @@
-FROM arm64v8/golang:1.14-alpine AS build
+FROM golang:1.26.10-alpine@sha256:a2012b4a1d1f9f7e9f44e0d39b805a901e856b1dd80b4e6ee4338db547050308 AS go-toolchain
+FROM alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc AS build
+COPY --from=go-toolchain /usr/local/go /usr/local/go
+ENV PATH=/usr/local/go/bin:$PATH GOPATH=/go GOTOOLCHAIN=local
 
 RUN apk add --no-cache git build-base && \
   git clone --branch v0.70.0 https://github.com/gohugoio/hugo.git && \
@@ -6,14 +9,16 @@ RUN apk add --no-cache git build-base && \
   CGO_ENABLED=0 go build -ldflags "-s -w -X github.com/gohugoio/hugo/common/hugo.buildDate=$(date +%Y-%m-%dT%H:%M:%SZ) -X github.com/gohugoio/hugo/common/hugo.commitHash=$(git rev-parse --short HEAD)" -o /tmp/hugo . && \
   CGO_ENABLED=1 go build -tags extended -ldflags "-s -w -X github.com/gohugoio/hugo/common/hugo.buildDate=$(date +%Y-%m-%dT%H:%M:%SZ) -X github.com/gohugoio/hugo/common/hugo.commitHash=$(git rev-parse --short HEAD)" -o /tmp/hugo-extended
 
-FROM plugins/base:linux-arm64
+FROM alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
 
 LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" \
   org.label-schema.name="Drone Hugo" \
   org.label-schema.vendor="Drone.IO Community" \
   org.label-schema.schema-version="1.0"
 
-RUN apk --no-cache add git libc6-compat libstdc++
+RUN apk --no-cache add 'ca-certificates>=20261020-r0' 'ca-certificates-bundle>=20261020-r0' mailcap git libc6-compat libstdc++
+
+ENV GODEBUG=netdns=go
 
 ENV PLUGIN_HUGO_ARCH=arm64
 ENV PLUGIN_HUGO_SHIPPED_VERSION=0.70.0
